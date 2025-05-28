@@ -1,0 +1,43 @@
+-- Comisión del mes de mayo del empleado con id=2 aplicando un 10% al monto de las rentas
+SELECT staff_id, SUM(amount * 0.10)
+FROM payment
+WHERE staff_id = 2 AND MONTH(payment_date) = 5;
+
+-- Comisión del mes de junio del empleado con id=1 aplicando un 10% al monto de las rentas
+SELECT staff_id, SUM(amount * 0.10)
+FROM payment
+WHERE staff_id = 1 AND MONTH(payment_date) = 6;
+
+-- Comisión del 30 de mayo agregando 1 dólar y limitando al 50% del monto de la renta
+SELECT rental_id, staff_id, amount * 0.10 + 1
+FROM payment
+WHERE DATE(payment_date) = '2025-05-30' AND amount * 0.10 + 1 <= amount * 0.50;
+
+-- Descuento del 20% para clientes que rentaron el 30 o 31 de cada mes
+SELECT customer_id, rental_id, amount, amount * 0.20, amount * 0.80
+FROM payment
+WHERE DAY(payment_date) IN (30, 31);
+
+-- Aumento de un día en devolución para rentas de lunes
+SELECT customer_id, rental_id, payment_date, DATE_ADD(payment_date, INTERVAL 3 DAY)
+FROM rental
+WHERE WEEKDAY(payment_date) = 0;
+
+-- Días transcurridos entre renta y devolución
+SELECT rental_id, DATEDIFF(return_date, rental_date)
+FROM rental;
+
+-- Rentas de los días domingo
+SELECT rental_id, customer_id, rental_date
+FROM rental
+WHERE WEEKDAY(rental_date) = 6;
+
+-- Rentas de los días domingo en mayo
+SELECT rental_id, customer_id, rental_date
+FROM rental
+WHERE WEEKDAY(rental_date) = 6 AND MONTH(rental_date) = 5;
+
+-- Rentas devueltas en domingo en junio
+SELECT rental_id, customer_id, rental_date, return_date
+FROM rental
+WHERE WEEKDAY(return_date) = 6 AND MONTH(return_date) = 6;
