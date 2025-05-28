@@ -1,0 +1,29 @@
+-- Listar todos los registros y campos de la tabla country
+SELECT * FROM country;
+
+-- Listar todos los registros y campos de la tabla category
+SELECT * FROM category;
+
+-- Listar todos los registros y campos de la tabla language
+SELECT * FROM language;
+
+-- Listar todos los registros y los campos country_id y country de la tabla country
+SELECT country_id, country FROM country;
+
+-- Listar todos los registros y el campo name de la tabla category
+SELECT name FROM category;
+
+-- Listar todos los registros y los campos language_id y name de la tabla language
+SELECT language_id, name FROM language;
+
+-- Listar todos los registros y campos de la tabla country ordenado por last_update de forma descendente
+SELECT * FROM country ORDER BY last_update DESC;
+
+-- Listar todos los registros y campos de la tabla category ordenado por name de forma descendente
+SELECT * FROM category ORDER BY name DESC;
+
+-- Listar todos los registros y campos de la tabla language ordenado por last_update de forma descendente
+SELECT * FROM language ORDER BY last_update DESC;
+
+-- Listar todos los registros sin duplicados en el campo first_name de la tabla actor
+SELECT DISTINCT first_name FROM actor;
