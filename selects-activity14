@@ -1,0 +1,74 @@
+-- Calcule el monto de las rentas de cada empleado durante el mes de mayo
+SELECT staff_id, SUM(amount) FROM payment WHERE MONTH(payment_date) = 5 GROUP BY staff_id;
+
+-- Calcule el promedio de los pagos por cada mes
+SELECT MONTH(payment_date), AVG(amount) FROM payment GROUP BY MONTH(payment_date);
+
+-- Calcule el promedio de los pagos de cada cliente
+SELECT customer_id, AVG(amount) FROM payment GROUP BY customer_id;
+
+-- Calcule el promedio de los pagos de cada día de la semana
+SELECT DAYOFWEEK(payment_date), AVG(amount) FROM payment GROUP BY DAYOFWEEK(payment_date);
+
+-- Calcule cuantas rentas tiene cada cliente
+SELECT customer_id, COUNT(*) FROM rental GROUP BY customer_id;
+
+-- Calcule cuantas rentas tiene cada empleado
+SELECT staff_id, COUNT(*) FROM rental GROUP BY staff_id;
+
+-- Calcule cuantos clientes tiene cada tienda
+SELECT store_id, COUNT(*) FROM customer GROUP BY store_id;
+
+-- Calcule cuantas películas tiene cada categoría de rating
+SELECT rating, COUNT(*) FROM film GROUP BY rating;
+
+-- Calcule cuantas ciudades están registradas por país
+SELECT country_id, COUNT(*) FROM city GROUP BY country_id;
+
+-- Calcule cuantas películas hay en cada tienda
+SELECT inventory.store_id, COUNT(*) FROM inventory GROUP BY inventory.store_id;
+
+-- Calcule el monto total de pagos de cada cliente
+SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id;
+
+-- Liste los empleados que han generado pagos con un monto total mayor a $100
+SELECT staff_id, SUM(amount) FROM payment GROUP BY staff_id HAVING SUM(amount) > 100;
+
+-- Calcule el número de pagos realizados por cada cliente en el mes de junio
+SELECT customer_id, COUNT(*) FROM payment WHERE MONTH(payment_date) = 6 GROUP BY customer_id;
+
+-- Calcule la cantidad de películas por cada duración de renta (rental_duration)
+SELECT rental_duration, COUNT(*) FROM film GROUP BY rental_duration;
+
+-- Calcule la cantidad total de pagos recibidos cada año
+SELECT YEAR(payment_date), SUM(amount) FROM payment GROUP BY YEAR(payment_date);
+
+-- Calcule el monto total de pagos por cada día de la semana
+SELECT DAYOFWEEK(payment_date), SUM(amount) FROM payment GROUP BY DAYOFWEEK(payment_date);
+
+-- Liste los días donde el total de pagos fue mayor a $500
+SELECT DATE(payment_date), SUM(amount) FROM payment GROUP BY DATE(payment_date) HAVING SUM(amount) > 500;
+
+-- Calcule cuántas películas hay en cada duración (length) específica
+SELECT length, COUNT(*) FROM film GROUP BY length;
+
+-- Calcule la cantidad de pagos realizados en cada tienda
+SELECT staff_id, COUNT(*) FROM payment GROUP BY staff_id;
+
+-- Calcule el monto total de pagos por cada cliente, pero solo para aquellos que han realizado más de 5 pagos
+SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id HAVING COUNT(*) > 5;
+
+-- Calcule el número de películas según su clasificación (rating)
+SELECT rating, COUNT(*) FROM film GROUP BY rating;
+
+-- Liste los clientes que han realizado pagos con un monto promedio mayor a $5
+SELECT customer_id, AVG(amount) FROM payment GROUP BY customer_id HAVING AVG(amount) > 5;
+
+-- Calcule la cantidad de películas en cada duración de renta (rental_duration) mayor a 5 días
+SELECT rental_duration, COUNT(*) FROM film WHERE rental_duration > 5 GROUP BY rental_duration;
+
+-- Calcule el total de pagos recibidos por cada mes, pero solo los meses con más de 100 pagos
+SELECT MONTH(payment_date), SUM(amount) FROM payment GROUP BY MONTH(payment_date) HAVING COUNT(*) > 100;
+
+-- Liste las clasificaciones de películas (rating) que tienen más de 200 películas registradas
+SELECT rating, COUNT(*) FROM film GROUP BY rating HAVING COUNT(*) > 200;
